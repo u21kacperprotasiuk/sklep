@@ -1,0 +1,261 @@
+body {
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#111;
+  color:white;
+}
+
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 5%;
+  background:#000;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo {
+  font-size:28px;
+  font-weight:bold;
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  margin-left:22px;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+nav a:hover { color:#00e1ff; }
+
+nav a.active { color:#ffdf00; }
+
+.btn {
+  padding:6px 12px;
+  background:#006cff;
+  border-radius:5px;
+}
+
+.cart {
+  color:#00ff6a;
+  font-weight:bold;
+}
+
+.burger {
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  color:white;
+}
+
+.hero {
+  background:url('https://cdn.wallpapersafari.com/16/92/my2PqQ.jpg') center/cover no-repeat;
+  text-align:center;
+  padding:120px 20px;
+}
+
+.hero h1 {
+  font-size:52px;
+  margin-bottom:10px;
+}
+
+.hero-btn {
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 28px;
+  background:#ffb300;
+  color:black;
+  font-weight:bold;
+  border-radius:5px;
+  text-decoration:none;
+}
+
+.container {
+  width:90%;
+  margin:35px auto;
+  display:flex;
+  gap:30px;
+}
+
+.filters {
+  width:260px;
+  background:#1b1b1b;
+  padding:20px;
+  border-radius:10px;
+}
+
+.filters form {
+  display:flex;
+  flex-direction:column;
+}
+
+.filters input,
+.filters select {
+  padding:6px;
+  margin-bottom:12px;
+  border:none;
+  border-radius:4px;
+  background:#2a2a2a;
+  color:white;
+}
+
+.filter-btn {
+  background:#007bff;
+  color:white;
+  padding:9px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.filter-btn:hover { background:#005bd1; }
+
+.products {
+  flex:1;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:25px;
+}
+
+.product-card {
+  background:#1b1b1b;
+  padding:15px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 0 6px rgba(255,255,255,0.08);
+  transition:0.25s;
+}
+
+.product-card:hover {
+  transform:scale(1.03);
+}
+
+.product-card img {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:6px;
+}
+
+.platform {
+  display:inline-block;
+  margin:6px 0;
+  padding:3px 7px;
+  background:#007bff;
+  font-size:13px;
+  border-radius:4px;
+}
+
+.price {
+  margin:10px 0;
+  font-size:22px;
+  color:#26ff00;
+  font-weight:bold;
+}
+
+.more {
+  display:block;
+  margin-bottom:8px;
+  color:#00e1ff;
+  text-decoration:none;
+}
+
+.add-cart {
+  background:#00c22e;
+  color:black;
+  border:none;
+  padding:8px 12px;
+  width:100%;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.add-cart:hover { background:#00a325; }
+
+.no-results {
+  font-size:20px;
+  padding:20px;
+}
+
+footer {
+  background:#000;
+  color:white;
+  text-align:center;
+  padding:20px;
+  margin-top:50px;
+}
+
+@media(max-width:850px) {
+  .container { flex-direction:column; }
+  .filters { width:100%; }
+}
+
+@media(max-width:700px) {
+  nav { display:none; }
+  nav.open {
+    display:flex;
+    flex-direction:column;
+    background:#000;
+    padding:15px;
+    position:absolute;
+    top:60px;
+    right:0;
+    width:200px;
+  }
+  .burger { display:block; }
+}
+
+.slider {
+  position:relative;
+  width:100%;
+  height:380px;
+  overflow:hidden;
+}
+
+.slides {
+  width:100%;
+  height:100%;
+}
+
+.slide {
+  width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  display:none;
+}
+
+.prev, .next {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.6);
+  color:white;
+  border:none;
+  padding:10px 16px;
+  cursor:pointer;
+  font-size:22px;
+  border-radius:5px;
+}
+
+.prev { left:15px; }
+.next { right:15px; }
+
+.reset-btn {
+  display:inline-block;
+  margin-top:8px;
+  padding:7px 10px;
+  background:#444;
+  color:white;
+  text-align:center;
+  border-radius:5px;
+  text-decoration:none;
+}
+
+.reset-btn:hover { background:#666; }
+
