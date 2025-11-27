@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "includes/db.php"; 
+require_once "includes/db.php";
 
 $blad = "";
 
@@ -13,16 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $blad = "Wypełnij wszystkie pola.";
     } else {
 
-        $stmt = $conn->prepare("SELECT id, login, haslo, pelna_nazwa FROM uzytkownicy WHERE login = ?");
-        $stmt->bind_param("s", $login);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt = $pdo->prepare("SELECT id, login, haslo, pelna_nazwa FROM uzytkownicy WHERE login = ?");
+        $stmt->execute([$login]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result->num_rows === 1) {
-
-            $user = $result->fetch_assoc();
-
-
+        if ($user) {
 
             if ($haslo === $user["haslo"]) {
 
