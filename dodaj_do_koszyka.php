@@ -1,13 +1,20 @@
 <?php
 session_start();
 
-$id = $_GET['id'];
+$id = $_GET['id'] ?? null;
 
-if (!isset($_SESSION['koszyk'][$id])) {
-    $_SESSION['koszyk'][$id] = 1;
+if ($id) {
+    if (!isset($_SESSION['koszyk'][$id])) {
+        $_SESSION['koszyk'][$id] = 1;
+    } else {
+        $_SESSION['koszyk'][$id]++;
+    }
+    
+    $ilosc = count($_SESSION['koszyk']);
+    
+    // Zwróć JSON zamiast przekierowania
+    echo json_encode(['success' => true, 'ilosc' => $ilosc]);
 } else {
-    $_SESSION['koszyk'][$id]++;
+    echo json_encode(['success' => false]);
 }
-
-header("Location: koszyk.php");
 exit;

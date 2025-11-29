@@ -286,69 +286,129 @@ header {
 
 /* FILTRY */
 .filters {
-    background: #141414;
-    padding: 30px;
-    border-bottom: 2px solid #222;
+    background: linear-gradient(135deg, #1a1a1a 0%, #141414 100%);
+    padding: 35px;
+    border-bottom: 2px solid #00d9ff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .filters form {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 25px;
     flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    color: #00d9ff;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-left: 5px;
 }
 
 .filters input,
 .filters select {
-    padding: 12px 16px;
+    padding: 14px 18px;
     background: #0a0a0a;
-    border: 2px solid #222;
+    border: 2px solid #333;
     color: #eee;
-    border-radius: 8px;
-    width: 180px;
+    border-radius: 10px;
+    min-width: 180px;
     outline: none;
-    transition: 0.3s;
+    transition: all 0.3s;
+    font-size: 15px;
+}
+
+.filters select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d9ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 45px;
+}
+
+/* Styl dla opcji w select */
+.filters select option {
+    background: #1a1a1a;
+    color: #eee;
+    padding: 12px;
+    border-radius: 5px;
+}
+
+.filters select option:hover {
+    background: #00d9ff;
+    color: #000;
 }
 
 .filters input:focus,
 .filters select:focus {
     border-color: #00d9ff;
-    box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+    background: #0f0f0f;
 }
 
-.filters button {
-    background: #00d9ff;
-    color: #000;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
+.filters input:hover,
+.filters select:hover {
+    border-color: #00d9ff;
 }
 
-.filters button:hover {
-    background: #00b8dd;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 217, 255, 0.3);
+.filters input[type="number"]::-webkit-inner-spin-button,
+.filters input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
 }
 
 .filters .reset {
-    background: #333;
-    padding: 12px 25px;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #444 0%, #333 100%);
+    padding: 14px 30px;
+    border-radius: 10px;
     color: white;
     text-decoration: none;
-    transition: 0.3s;
-    font-weight: 500;
+    transition: all 0.3s;
+    font-weight: 600;
+    border: 2px solid #555;
+    cursor: pointer;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
 }
 
 .filters .reset:hover {
-    background: #444;
+    background: linear-gradient(135deg, #555 0%, #444 100%);
     transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 217, 255, 0.2);
+    border-color: #00d9ff;
 }
 
-/* PRODUKTY */
+@media (max-width: 768px) {
+    .filters form {
+        gap: 20px;
+    }
+    
+    .filter-group {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .filters input,
+    .filters select {
+        width: 100%;
+    }
+}
+
+/* PRODUCTS */
 .produkty {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -365,6 +425,8 @@ header {
     text-align: center;
     border: 1px solid #222;
     transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
 .produkt:hover {
@@ -373,18 +435,37 @@ header {
     border-color: #00d9ff;
 }
 
+/* Link owija obrazek, tytuł, platformę i cenę */
+.produkt-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+    flex: 1;
+}
+
 .produkt img {
     width: 100%;
     height: 240px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.produkt-link:hover img {
+    transform: scale(1.05);
 }
 
 .produkt h3 {
     font-size: 20px;
     color: #00d9ff;
     margin-bottom: 8px;
+    transition: 0.3s;
+}
+
+.produkt-link:hover h3 {
+    color: #00edff;
 }
 
 .produkt .platforma {
@@ -400,23 +481,6 @@ header {
     margin: 12px 0;
 }
 
-.btn-szczegoly {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background: #222;
-    color: #ddd;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: 0.3s;
-    font-size: 14px;
-}
-
-.btn-szczegoly:hover {
-    background: #333;
-    color: #00d9ff;
-}
-
 .btn-koszyk {
     display: block;
     margin-top: 12px;
@@ -427,6 +491,10 @@ header {
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-size: 15px;
 }
 
 .btn-koszyk:hover {
@@ -493,5 +561,225 @@ header {
     .dropdown-menu {
         left: 50%;
         transform: translateX(-50%);
+    }
+}
+
+/* FOOTER */
+footer {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+    border-top: 3px solid #00d9ff;
+    padding: 50px 40px 30px;
+    margin-top: 80px;
+}
+
+.footer-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    color: #00d9ff;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section li {
+    margin-bottom: 12px;
+}
+
+.footer-section a {
+    color: #ddd;
+    text-decoration: none;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-section a:hover {
+    color: #00d9ff;
+    padding-left: 5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    background: #222;
+    border: 2px solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.social-icon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    background: #00d9ff;
+    border-color: #00d9ff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 217, 255, 0.4);
+}
+
+.social-icon:hover img {
+    filter: brightness(0);
+}
+
+.app-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.app-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #222;
+    border: 2px solid #333;
+    border-radius: 10px;
+    color: #ddd;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.app-button:hover {
+    background: #333;
+    border-color: #00d9ff;
+    color: #00d9ff;
+}
+
+.app-button-icon {
+    font-size: 24px;
+}
+
+.app-button-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.app-button-small {
+    font-size: 11px;
+    color: #888;
+}
+
+.app-button-large {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom p {
+    color: #888;
+    font-size: 14px;
+}
+
+.footer-options {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.footer-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ddd;
+    text-decoration: none;
+    padding: 8px 15px;
+    background: #222;
+    border-radius: 8px;
+    transition: 0.3s;
+    border: 1px solid #333;
+}
+
+.footer-option:hover {
+    background: #333;
+    color: #00d9ff;
+    border-color: #00d9ff;
+}
+
+.trustpilot-box {
+    background: #0a0a0a;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin-top: 15px;
+}
+
+.trustpilot-stars {
+    color: #00d9ff;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.trustpilot-text {
+    color: #ddd;
+    font-size: 14px;
+}
+
+.trustpilot-score {
+    color: #00d9ff;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 40px 20px 20px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-options {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .footer-option {
+        width: 100%;
+        justify-content: center;
     }
 }
