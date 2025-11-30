@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $blad = "Wypełnij wszystkie pola.";
     } else {
 
-        $stmt = $pdo->prepare("SELECT id, login, haslo, pelna_nazwa FROM uzytkownicy WHERE login = ?");
+        $stmt = $pdo->prepare("SELECT id, login, haslo, pelna_nazwa, rola FROM uzytkownicy WHERE login = ?");
         $stmt->execute([$login]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -24,8 +24,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION["zalogowany"] = true;
                 $_SESSION["userid"] = $user["id"];
                 $_SESSION["username"] = $user["pelna_nazwa"];
+                $_SESSION["rola"] = $user["rola"];
 
-                header("Location: index.php");
+                // Przekieruj do odpowiedniej strony
+                if ($user["rola"] === "admin") {
+                    header("Location: admin/index.php");
+                } else {
+                    header("Location: index.php");
+                }
                 exit;
             } else {
                 $blad = "Nieprawidłowe hasło.";

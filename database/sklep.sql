@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 27 Lis 2025, 13:05
--- Wersja serwera: 10.4.17-MariaDB
--- Wersja PHP: 8.0.2
+-- Generation Time: Lis 30, 2025 at 05:22 PM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `sklep`
+-- Database: `sklep`
 --
 
 -- --------------------------------------------------------
@@ -29,18 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `dostawy` (
   `id` int(11) NOT NULL,
-  `nazwa` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nazwa` varchar(255) NOT NULL,
   `koszt` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `dostawy`
+-- Dumping data for table `dostawy`
 --
 
 INSERT INTO `dostawy` (`id`, `nazwa`, `koszt`) VALUES
-(1, 'Kurier DPD', '19.99'),
-(2, 'Paczkomat InPost', '14.99'),
-(3, 'Odbiór osobisty', '0.00');
+(1, 'Kurier DPD', 19.99),
+(2, 'Paczkomat InPost', 14.99),
+(3, 'Odbiór osobisty', 0.00);
 
 -- --------------------------------------------------------
 
@@ -50,12 +50,12 @@ INSERT INTO `dostawy` (`id`, `nazwa`, `koszt`) VALUES
 
 CREATE TABLE `kategorie` (
   `id` int(11) NOT NULL,
-  `nazwa` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `opis` text COLLATE utf8_unicode_ci DEFAULT NULL
+  `nazwa` varchar(255) NOT NULL,
+  `opis` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `kategorie`
+-- Dumping data for table `kategorie`
 --
 
 INSERT INTO `kategorie` (`id`, `nazwa`, `opis`) VALUES
@@ -74,14 +74,14 @@ INSERT INTO `kategorie` (`id`, `nazwa`, `opis`) VALUES
 
 CREATE TABLE `komentarze` (
   `id` int(11) NOT NULL,
-  `komentarz` text COLLATE utf8_unicode_ci NOT NULL,
+  `komentarz` text NOT NULL,
   `data_komentarza` datetime NOT NULL DEFAULT current_timestamp(),
   `produkt_id` int(11) NOT NULL,
   `uzytkownik_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `komentarze`
+-- Dumping data for table `komentarze`
 --
 
 INSERT INTO `komentarze` (`id`, `komentarz`, `data_komentarza`, `produkt_id`, `uzytkownik_id`) VALUES
@@ -101,7 +101,7 @@ CREATE TABLE `koszyki` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `koszyki`
+-- Dumping data for table `koszyki`
 --
 
 INSERT INTO `koszyki` (`id`, `uzytkownik_id`, `data_utworzenia`) VALUES
@@ -122,7 +122,7 @@ CREATE TABLE `pozycje_koszyka` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `pozycje_koszyka`
+-- Dumping data for table `pozycje_koszyka`
 --
 
 INSERT INTO `pozycje_koszyka` (`id`, `koszyk_id`, `produkt_id`, `ilosc`) VALUES
@@ -145,12 +145,12 @@ CREATE TABLE `pozycje_zamowienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `pozycje_zamowienia`
+-- Dumping data for table `pozycje_zamowienia`
 --
 
 INSERT INTO `pozycje_zamowienia` (`id`, `zamowienie_id`, `produkt_id`, `ilosc`, `cena`) VALUES
-(1, 1, 1, 1, '199.99'),
-(2, 2, 2, 1, '79.99');
+(1, 1, 1, 1, 199.99),
+(2, 2, 2, 1, 79.99);
 
 -- --------------------------------------------------------
 
@@ -160,30 +160,30 @@ INSERT INTO `pozycje_zamowienia` (`id`, `zamowienie_id`, `produkt_id`, `ilosc`, 
 
 CREATE TABLE `produkty` (
   `id` int(11) NOT NULL,
-  `nazwa` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `opis` text COLLATE utf8_unicode_ci NOT NULL,
+  `nazwa` varchar(255) NOT NULL,
+  `opis` text NOT NULL,
   `cena` decimal(10,2) NOT NULL,
   `data_dodania` datetime NOT NULL DEFAULT current_timestamp(),
   `pegi` int(11) NOT NULL,
-  `platforma` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `wydawca` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `wersja` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `zdjecie` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `platforma` varchar(50) NOT NULL,
+  `wydawca` varchar(255) NOT NULL,
+  `wersja` varchar(50) NOT NULL,
+  `zdjecie` varchar(255) DEFAULT NULL,
   `ilosc_stan` int(11) NOT NULL DEFAULT 0,
   `kategoria_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `produkty`
+-- Dumping data for table `produkty`
 --
 
 INSERT INTO `produkty` (`id`, `nazwa`, `opis`, `cena`, `data_dodania`, `pegi`, `platforma`, `wydawca`, `wersja`, `zdjecie`, `ilosc_stan`, `kategoria_id`) VALUES
-(1, 'Cyberpunk 2077', 'RPG w otwartym świecie.', '199.99', '2025-11-27 11:34:21', 18, 'PC', 'CD Projekt RED', 'klucz cyfrowy', 'cyberpunk2077.jpg', 100, 2),
-(2, 'The Witcher 3: Wild Hunt', 'Kultowe RPG fantasy.', '79.99', '2025-11-27 11:34:21', 18, 'PC', 'CD Projekt RED', 'płyta', 'witcher.jpg', 25, 2),
-(3, 'Counter-Strike 2', 'Strzelanka FPS online.', '0.00', '2025-11-27 11:34:21', 16, 'PC', 'Valve', 'klucz cyfrowy', 'counter-strike-2.jpg', 9999, 1),
-(4, 'FIFA 24', 'Symulator piłki nożnej.', '239.00', '2025-11-27 11:34:21', 3, 'PS5', 'EA Sports', 'płyta', 'fc24.jpg', 40, 4),
-(5, 'Forza Horizon 5', 'Wyścigi w otwartym świecie.', '249.99', '2025-11-27 11:34:21', 12, 'Xbox', 'Microsoft', 'klucz cyfrowy', 'forza5.jpg', 60, 5),
-(6, 'Age of Empires IV', 'Strategia czasu rzeczywistego.', '159.99', '2025-11-27 11:34:21', 12, 'PC', 'Microsoft', 'klucz cyfrowy', 'age-of-empires-iv.jpg', 30, 3);
+(1, 'Cyberpunk 2077', 'RPG w otwartym świecie.', 199.99, '2025-11-27 11:34:21', 18, 'PC', 'CD Projekt RED', 'klucz cyfrowy', 'cyberpunk2077.jpg', 100, 2),
+(2, 'The Witcher 3: Wild Hunt', 'Kultowe RPG fantasy.', 79.98, '2025-11-27 11:34:21', 18, 'PC', 'CD Projekt RED', 'płyta', 'witcher.jpg', 25, 2),
+(3, 'Counter-Strike 2', 'Strzelanka FPS online.', 0.00, '2025-11-27 11:34:21', 16, 'PC', 'Valve', 'klucz cyfrowy', 'counter-strike-2.jpg', 9999, 1),
+(4, 'FIFA 24', 'Symulator piłki nożnej.', 239.00, '2025-11-27 11:34:21', 3, 'PS5', 'EA Sports', 'płyta', 'fc24.jpg', 40, 4),
+(5, 'Forza Horizon 5', 'Wyścigi w otwartym świecie.', 249.99, '2025-11-27 11:34:21', 12, 'Xbox', 'Microsoft', 'klucz cyfrowy', 'forza5.jpg', 60, 5),
+(6, 'Age of Empires IV', 'Strategia czasu rzeczywistego.', 159.99, '2025-11-27 11:34:21', 12, 'PC', 'Microsoft', 'klucz cyfrowy', 'age-of-empires-iv.jpg', 30, 3);
 
 -- --------------------------------------------------------
 
@@ -196,11 +196,11 @@ CREATE TABLE `stan` (
   `produkt_id` int(11) NOT NULL,
   `zmiana` int(11) NOT NULL,
   `data_zmiany` datetime NOT NULL DEFAULT current_timestamp(),
-  `opis` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `opis` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `stan`
+-- Dumping data for table `stan`
 --
 
 INSERT INTO `stan` (`id`, `produkt_id`, `zmiana`, `data_zmiany`, `opis`) VALUES
@@ -216,20 +216,22 @@ INSERT INTO `stan` (`id`, `produkt_id`, `zmiana`, `data_zmiany`, `opis`) VALUES
 
 CREATE TABLE `uzytkownicy` (
   `id` int(11) NOT NULL,
-  `login` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `haslo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `pelna_nazwa` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `login` varchar(255) NOT NULL,
+  `haslo` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `pelna_nazwa` varchar(255) DEFAULT NULL,
+  `rola` varchar(50) NOT NULL DEFAULT 'user',
   `data_rejestracji` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `uzytkownicy`
+-- Dumping data for table `uzytkownicy`
 --
 
-INSERT INTO `uzytkownicy` (`id`, `login`, `haslo`, `email`, `pelna_nazwa`, `data_rejestracji`) VALUES
-(1, 'arek', 'test123', 'arek@example.com', 'Arek Gracz', '2025-11-27 11:34:21'),
-(2, 'kasia', 'test123', 'kasia@example.com', 'Kasia Gamerka', '2025-11-27 11:34:21');
+INSERT INTO `uzytkownicy` (`id`, `login`, `haslo`, `email`, `pelna_nazwa`, `rola`, `data_rejestracji`) VALUES
+(1, 'arek', 'test123', 'arek@example.com', 'Arek Gracz', 'user', '2025-11-27 11:34:21'),
+(2, 'kasia', 'test123', 'kasia@example.com', 'Kasia Gamerka', 'user', '2025-11-27 11:34:21'),
+(3, 'admin', 'admin123', 'admin@gamestore.pl', 'Administrator', 'admin', '2025-11-30 17:03:13');
 
 -- --------------------------------------------------------
 
@@ -241,22 +243,22 @@ CREATE TABLE `zamowienia` (
   `id` int(11) NOT NULL,
   `uzytkownik_id` int(11) NOT NULL,
   `data_zamowienia` datetime NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'nowe',
+  `status` varchar(50) NOT NULL DEFAULT 'nowe',
   `suma` decimal(10,2) NOT NULL,
   `dostawa_id` int(11) NOT NULL DEFAULT 1,
-  `adres_ulica` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `adres_miasto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `adres_kod` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `adres_kraj` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Polska'
+  `adres_ulica` varchar(255) DEFAULT NULL,
+  `adres_miasto` varchar(255) DEFAULT NULL,
+  `adres_kod` varchar(20) DEFAULT NULL,
+  `adres_kraj` varchar(255) DEFAULT 'Polska'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `zamowienia`
+-- Dumping data for table `zamowienia`
 --
 
 INSERT INTO `zamowienia` (`id`, `uzytkownik_id`, `data_zamowienia`, `status`, `suma`, `dostawa_id`, `adres_ulica`, `adres_miasto`, `adres_kod`, `adres_kraj`) VALUES
-(1, 1, '2025-11-27 11:34:21', 'nowe', '199.99', 1, 'Testowa 12/3', 'Warszawa', '00-001', 'Polska'),
-(2, 2, '2025-11-27 11:34:21', 'nowe', '79.99', 2, 'Lipowa 5', 'Kraków', '30-002', 'Polska');
+(1, 1, '2025-11-27 11:34:21', 'nowe', 199.99, 1, 'Testowa 12/3', 'Warszawa', '00-001', 'Polska'),
+(2, 2, '2025-11-27 11:34:21', 'nowe', 79.99, 2, 'Lipowa 5', 'Kraków', '30-002', 'Polska');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -334,114 +336,114 @@ ALTER TABLE `zamowienia`
   ADD KEY `dostawa_id` (`dostawa_id`);
 
 --
--- AUTO_INCREMENT dla zrzuconych tabel
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT dla tabeli `dostawy`
+-- AUTO_INCREMENT for table `dostawy`
 --
 ALTER TABLE `dostawy`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT dla tabeli `kategorie`
+-- AUTO_INCREMENT for table `kategorie`
 --
 ALTER TABLE `kategorie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT dla tabeli `komentarze`
+-- AUTO_INCREMENT for table `komentarze`
 --
 ALTER TABLE `komentarze`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT dla tabeli `koszyki`
+-- AUTO_INCREMENT for table `koszyki`
 --
 ALTER TABLE `koszyki`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT dla tabeli `pozycje_koszyka`
+-- AUTO_INCREMENT for table `pozycje_koszyka`
 --
 ALTER TABLE `pozycje_koszyka`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT dla tabeli `pozycje_zamowienia`
+-- AUTO_INCREMENT for table `pozycje_zamowienia`
 --
 ALTER TABLE `pozycje_zamowienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT dla tabeli `produkty`
+-- AUTO_INCREMENT for table `produkty`
 --
 ALTER TABLE `produkty`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT dla tabeli `stan`
+-- AUTO_INCREMENT for table `stan`
 --
 ALTER TABLE `stan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT dla tabeli `uzytkownicy`
+-- AUTO_INCREMENT for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT dla tabeli `zamowienia`
+-- AUTO_INCREMENT for table `zamowienia`
 --
 ALTER TABLE `zamowienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Ograniczenia dla zrzutów tabel
+-- Constraints for dumped tables
 --
 
 --
--- Ograniczenia dla tabeli `komentarze`
+-- Constraints for table `komentarze`
 --
 ALTER TABLE `komentarze`
   ADD CONSTRAINT `komentarze_ibfk_1` FOREIGN KEY (`produkt_id`) REFERENCES `produkty` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `komentarze_ibfk_2` FOREIGN KEY (`uzytkownik_id`) REFERENCES `uzytkownicy` (`id`) ON DELETE CASCADE;
 
 --
--- Ograniczenia dla tabeli `koszyki`
+-- Constraints for table `koszyki`
 --
 ALTER TABLE `koszyki`
   ADD CONSTRAINT `koszyki_ibfk_1` FOREIGN KEY (`uzytkownik_id`) REFERENCES `uzytkownicy` (`id`) ON DELETE CASCADE;
 
 --
--- Ograniczenia dla tabeli `pozycje_koszyka`
+-- Constraints for table `pozycje_koszyka`
 --
 ALTER TABLE `pozycje_koszyka`
   ADD CONSTRAINT `pozycje_koszyka_ibfk_1` FOREIGN KEY (`koszyk_id`) REFERENCES `koszyki` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `pozycje_koszyka_ibfk_2` FOREIGN KEY (`produkt_id`) REFERENCES `produkty` (`id`) ON DELETE CASCADE;
 
 --
--- Ograniczenia dla tabeli `pozycje_zamowienia`
+-- Constraints for table `pozycje_zamowienia`
 --
 ALTER TABLE `pozycje_zamowienia`
   ADD CONSTRAINT `pozycje_zamowienia_ibfk_1` FOREIGN KEY (`zamowienie_id`) REFERENCES `zamowienia` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `pozycje_zamowienia_ibfk_2` FOREIGN KEY (`produkt_id`) REFERENCES `produkty` (`id`);
 
 --
--- Ograniczenia dla tabeli `produkty`
+-- Constraints for table `produkty`
 --
 ALTER TABLE `produkty`
   ADD CONSTRAINT `produkty_ibfk_1` FOREIGN KEY (`kategoria_id`) REFERENCES `kategorie` (`id`) ON DELETE CASCADE;
 
 --
--- Ograniczenia dla tabeli `stan`
+-- Constraints for table `stan`
 --
 ALTER TABLE `stan`
   ADD CONSTRAINT `stan_ibfk_1` FOREIGN KEY (`produkt_id`) REFERENCES `produkty` (`id`) ON DELETE CASCADE;
 
 --
--- Ograniczenia dla tabeli `zamowienia`
+-- Constraints for table `zamowienia`
 --
 ALTER TABLE `zamowienia`
   ADD CONSTRAINT `zamowienia_ibfk_1` FOREIGN KEY (`uzytkownik_id`) REFERENCES `uzytkownicy` (`id`),

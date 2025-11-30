@@ -1,0 +1,242 @@
+/* USERS MODULE STYLES */
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00d9ff, #0088cc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #fff;
+    font-size: 15px;
+}
+
+.user-login {
+    font-size: 13px;
+    color: #888;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.role-admin {
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+    border: 1px solid #ff4444;
+}
+
+.role-user {
+    background: rgba(0, 217, 255, 0.2);
+    color: #00d9ff;
+    border: 1px solid #00d9ff;
+}
+
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.quick-stat {
+    background: #0a0a0a;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.quick-stat:hover {
+    border-color: #00d9ff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 217, 255, 0.2);
+}
+
+.quick-stat-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #00d9ff;
+    text-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+}
+
+.quick-stat-label {
+    font-size: 14px;
+    color: #888;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.role-select-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.role-select-form select {
+    padding: 6px 12px;
+    background: #0a0a0a;
+    border: 2px solid #333;
+    color: #eee;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.role-select-form select:hover {
+    border-color: #00d9ff;
+}
+
+.role-select-form select:focus {
+    border-color: #00d9ff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+}
+
+/* MODAL STYLES */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid #00d9ff;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+    animation: slideUp 0.3s ease-in-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #333;
+}
+
+.modal-header h3 {
+    color: #00d9ff;
+    font-size: 24px;
+    text-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+}
+
+.modal-close {
+    background: #ff4444;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.modal-close:hover {
+    background: #cc0000;
+    transform: scale(1.1);
+}
+
+/* USER STATS */
+.user-stats-highlight {
+    color: #00d9ff;
+    font-weight: 600;
+}
+
+.user-stats-empty {
+    color: #666;
+}
+
+.user-stats-positive {
+    color: #00ff88;
+    font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .quick-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .role-select-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .role-select-form select,
+    .role-select-form button {
+        width: 100%;
+    }
+}

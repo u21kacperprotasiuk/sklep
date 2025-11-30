@@ -98,6 +98,13 @@ $produkty = $stmt->fetchAll();
         <div class="right-menu">
             <?php if (isset($_SESSION['zalogowany']) && $_SESSION['zalogowany']): ?>
                 <span class="username">👤 <?= htmlspecialchars($_SESSION['username']) ?></span>
+        
+                <?php if (isset($_SESSION['rola']) && $_SESSION['rola'] === 'admin'): ?>
+                    <a href="admin/index.php" class="btn-login" style="background: #00d9ff; color: #000;">
+                        ⚙️ Panel Admina
+                    </a>
+                <?php endif; ?>
+        
                 <a href="logout.php" class="btn-logout">Wyloguj</a>
             <?php else: ?>
                 <a href="login.php" class="btn-login">Logowanie</a>
@@ -106,7 +113,7 @@ $produkty = $stmt->fetchAll();
             <a href="koszyk.php" class="cart-link">
                 🛒 Koszyk <span class="cart-count">(<?= count($_SESSION['koszyk'] ?? []); ?>)</span>
             </a>
-        </div>
+</div>
 
     </nav>
 </header>
