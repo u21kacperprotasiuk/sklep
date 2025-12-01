@@ -2,6 +2,10 @@
 session_start();
 require_once "includes/db.php";
 
+// POBIERZ KATEGORIE Z BAZY
+$stmt_kategorie = $pdo->query("SELECT * FROM kategorie ORDER BY nazwa");
+$kategorie_menu = $stmt_kategorie->fetchAll();
+
 $id = $_GET['id'] ?? 0;
 $stmt = $pdo->prepare("SELECT * FROM produkty WHERE id = ?");
 $stmt->execute([$id]);
@@ -221,16 +225,17 @@ if (!$p) {
             <li><a href="index.php">Promocje</a></li>
             <li><a href="index.php">Nowości</a></li>
 
-            <!-- ROZWIJANE MENU KATEGORII -->
+            <!-- DYNAMICZNE ROZWIJANE MENU KATEGORII -->
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle">Kategorie ▼</a>
                 <ul class="dropdown-menu">
-                    <li><a href="index.php?kategoria=RPG">🗡️ RPG</a></li>
-                    <li><a href="index.php?kategoria=FPS">🔫 FPS</a></li>
-                    <li><a href="index.php?kategoria=Strategia">🎯 Strategia</a></li>
-                    <li><a href="index.php?kategoria=Sportowe">⚽ Sportowe</a></li>
-                    <li><a href="index.php?kategoria=Przygodowe">🏔️ Przygodowe</a></li>
-                    <li><a href="index.php?kategoria=MMO">🌐 MMO</a></li>
+                    <?php foreach ($kategorie_menu as $kat): ?>
+                        <li>
+                            <a href="index.php?kategoria=<?= urlencode($kat['nazwa']) ?>">
+                                <?= htmlspecialchars($kat['nazwa']) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </li>
         </ul>

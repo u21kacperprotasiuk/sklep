@@ -2,6 +2,10 @@
 session_start();
 require_once "includes/db.php";
 
+// POBIERZ KATEGORIE Z BAZY
+$stmt_kategorie = $pdo->query("SELECT * FROM kategorie ORDER BY nazwa");
+$kategorie_menu = $stmt_kategorie->fetchAll();
+
 $search = $_GET['search'] ?? '';
 $platforma = $_GET['platforma'] ?? '';
 $wydawca = $_GET['wydawca'] ?? '';
@@ -38,7 +42,6 @@ if ($cena_do !== '') {
     $params[':cena_do'] = (float)$cena_do;
 }
 
-// POPRAWKA: używamy kategoria_id i JOIN z tabelą kategorie
 if ($kategoria !== '') {
     $query .= " AND EXISTS (SELECT 1 FROM kategorie WHERE kategorie.id = produkty.kategoria_id AND kategorie.nazwa = :kategoria)";
     $params[':kategoria'] = $kategoria;
@@ -72,16 +75,17 @@ $produkty = $stmt->fetchAll();
             <li><a href="index.php">Promocje</a></li>
             <li><a href="index.php">Nowości</a></li>
 
-            <!-- ROZWIJANE MENU KATEGORII -->
+            <!-- DYNAMICZNE ROZWIJANE MENU KATEGORII -->
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle">Kategorie ▼</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#" class="kategoria-link" data-kategoria="RPG">🗡️ RPG</a></li>
-                    <li><a href="#" class="kategoria-link" data-kategoria="FPS">🔫 FPS</a></li>
-                    <li><a href="#" class="kategoria-link" data-kategoria="Strategia">🎯 Strategia</a></li>
-                    <li><a href="#" class="kategoria-link" data-kategoria="Sportowe">⚽ Sportowe</a></li>
-                    <li><a href="#" class="kategoria-link" data-kategoria="Przygodowe">🏔️ Przygodowe</a></li>
-                    <li><a href="#" class="kategoria-link" data-kategoria="MMO">🌐 MMO</a></li>
+                    <?php foreach ($kategorie_menu as $kat): ?>
+                        <li>
+                            <a href="#" class="kategoria-link" data-kategoria="<?= htmlspecialchars($kat['nazwa']) ?>">
+                                <?= htmlspecialchars($kat['nazwa']) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </li>
         </ul>
@@ -113,7 +117,7 @@ $produkty = $stmt->fetchAll();
             <a href="koszyk.php" class="cart-link">
                 🛒 Koszyk <span class="cart-count">(<?= count($_SESSION['koszyk'] ?? []); ?>)</span>
             </a>
-</div>
+        </div>
 
     </nav>
 </header>
