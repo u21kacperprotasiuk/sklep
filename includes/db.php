@@ -1,9 +1,9 @@
 <?php
 
-$host = "localhost";
-$dbname = "sklep";
-$user = "root";
-$pass = "";
+$host = "sql100.infinityfree.com";
+$dbname = "if0_40567490_sklep";
+$user = "if0_40567490";
+$pass = "CSJdRro3Ur";
 
 try {
     $pdo = new PDO(
