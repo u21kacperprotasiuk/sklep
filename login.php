@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION["username"] = $user["pelna_nazwa"];
                 $_SESSION["rola"] = $user["rola"];
 
-                // Przekieruj do odpowiedniej strony
                 if ($user["rola"] === "admin") {
                     header("Location: admin/index.php");
                 } else {
@@ -69,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </form>
 
     <p>Nie masz konta? <a href="register.php">Zarejestruj się</a></p>
+    <p>Nie chcesz się zalogować? <a href="index.php">Kontunuuj bez logowania</a></p>
 </div>
 
 </body>
