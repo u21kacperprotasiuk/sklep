@@ -49,7 +49,7 @@ require_once "includes/users_logic.php";
             <!-- KOMUNIKATY -->
             <?php if ($komunikat): ?>
                 <div class="alert alert-<?= $typ_komunikatu ?>">
-                    <?= $komunikat ?>
+                    <?= htmlspecialchars($komunikat) ?>
                 </div>
             <?php endif; ?>
 
